@@ -1,0 +1,9 @@
+com\artbrain\Application.class
+com\artbrain\dao\UserDetailsServiceDAO$1.class
+com\artbrain\mapper\Mapper.class
+com\artbrain\controller\UserController.class
+com\artbrain\entity\User.class
+com\artbrain\dao\UserDetailsServiceDAO.class
+com\artbrain\constants\Queries.class
+com\artbrain\dao\UserDetailsServiceDAO$ROLE.class
+com\artbrain\security\SecurityConfiguration.class
