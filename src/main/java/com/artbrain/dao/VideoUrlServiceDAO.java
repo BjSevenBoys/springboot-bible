@@ -22,8 +22,8 @@ public class VideoUrlServiceDAO {
   private static final String ROLE_PREFIX = "ROLE_";
 
   
-  public List<VideoUrl> loadAllVidelUrls() throws Exception {
-    return jdbcTemplate.query(Queries.LOAD_ALL_VIDEOURL, mapper::mapVideoUrl);
+  public List<VideoUrl> loadAllVidelUrls(String sql) throws Exception {
+    return jdbcTemplate.query(sql, mapper::mapVideoUrl);
   }
 
   public void updateUser(User user) throws Exception {

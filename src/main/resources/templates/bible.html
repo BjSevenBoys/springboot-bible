@@ -8,16 +8,13 @@
 		<meta name="description" content="圣经: Responsive Full Width Tabs" />
 		<meta name="keywords" content="responsive tabs, full width tabs, template, blueprint" />
 		<meta name="author" content="Codrops" />
-		<!--示例  -->
-		<!-- <script th:src="@{js/ie-emulation-modes-warning.js}" src="../static/js/ie-emulation-modes-warning.js" type="text/javascript"
-		 --><!--  -->
 		<link rel="shortcut icon" href="../favicon.ico"/>
 		  <link href="../static/css/demo.css"
           th:href="@{css/demo.css}"
           rel="stylesheet"
         />
          <link rel="shortcut icon" href="../favicon.ico"/>
-	  <link href="../static/css/component.css"
+	 	 <link href="../static/css/component.css"
          th:href="@{css/component.css}"
          rel="stylesheet"
          />
@@ -25,29 +22,17 @@
          th:href="@{css/bootstrap.min.css}"
          rel="stylesheet"
          />
-		<!-- <link rel="stylesheet" type="text/css" href="resources/css/demo.css" /> -->
-<!-- 		<link rel="stylesheet" type="text/css" href="resources/css/component.css" /> -->
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css"/>
-		 <script src="../static/js/jquery-latest.js"  th:src="@{js/jquery-latest.js}"   type="application/x-javascript"></script>
-		
-			<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
-	 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
-		 <script src="../static/js/cbpFWTabs.js"      th:src="@{js/cbpFWTabs.js}"        type="application/x-javascript"></script>
-		<script src="../static/biblejs/video.min.js"  th:src="@{biblejs/video.min.js}"   type="application/x-javascript"></script>
-		 <!-- <script src="http://code.jquery.com/jquery-latest.js"></script>  -->
-		
-		<!--  <script src="../static/js/bootstrap-table.min.js" th:src="@{js/bootstrap-table.min.js}"></script>
-		<script src="../static/js/jquery-latest.js" th:src="@{js/jquery-latest.js}"></script>
-		<script src="../static/js/bootstrap-table-zh-CN.min.js" th:src="@{js/bootstrap-table-zh-CN.min.js}"></script>
-		
-		 --><!-- <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
-		 -->
-		 <!-- 引用我们的Angular.js -->
-		<script src="../static/angular/angular.min.js" th:src="@{angular/angular.min.js}"></script>
-  
-	</head>
-	<body>
+<script src="../static/js/jquery-latest.js"  th:src="@{js/jquery-latest.js}"   type="application/x-javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../static/js/cbpFWTabs.js"      th:src="@{js/cbpFWTabs.js}"        type="application/x-javascript"></script>
+<script src="../static/biblejs/video.min.js"  th:src="@{biblejs/video.min.js}"   type="application/x-javascript"></script>
+<script src="../static/angular/angular.min.js" th:src="@{angular/angular.min.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+
+</head>
+<body>
 		<div class="container">
 			<header class="clearfix">
 				<span>【约1:1】太初有道，道与神同在，道就是神。<span class="bp-icon bp-icon-about" data-content="箴言九章十节说：「敬畏耶和华，是智慧的开端。」"></span></span>
@@ -64,26 +49,38 @@
 			<!-- <div> <video autoplay="autoplay" controls="controls" src="http://xyjs.mov.cnfuyin.com/cdn/08福音影视/福音电影/埃及王（中文字幕）/埃及王.mp4?sign=d42d94f22e756dbb010fdd4b9642104a&timestamp=1525266451&device=masterWeb"></video></div>
 			 -->
 		<table id="table"></table>
-		<script>
+<script>
 var getDataUrl="http://localhost:8090/findVideoUrlByMethodId";		
 			/* 加载唐崇荣视频表格  */
-			
-						
 			$('#table').bootstrapTable({
+			search:true,
+			showToggle:true,//视图切换
+			smartDisplay:false,//响应式切换（自动识别设备，显示不同的视图）
+			sortable:true,
 			striped:true,	//行间隔色
-			pagination:true,	//分页
+			
 			sortable:false,	//排序
-			cache:false,   //清除缓存
+			cache:false,   //需要缓存
 			sortOrder:"asc",	//排序方式
-			//sidePagination:"server",
+			sidePagination:"server",
+			//sidePagination:"server",//分页方式：client客户端分页，server服务端分页。
 			paginationCheckSave:true,  //分页保存勾选项
-			pageSize:10,
-			//height:bootstrapTableHeight,
+			pageSize:20,
 			pageNumber:1,
-			pageList:[10,30,45,100],
+			pageList:[20,50,100,1000],
 			url:getDataUrl,
+			queryParamsType:"",
+			pagination:true,	//分页
+			queryParams:function(params){
+				return{
+					rows:params.pageSize,
+					page:params.pageNumber,
+				}
+			},
 		    columns: [{
-		        field: 'id',
+		    	title:'序号',width:30,formatter:function(value,row,index){
+					var tableOptions = $('#table').bootstrapTable('getOptions');
+					return (tableOptions.pageNumber-1)*tableOptions.pageSize+index+1;}
 		    }, {
 		        title: '证道题目',
 		        field: 'name'
@@ -94,7 +91,6 @@ var getDataUrl="http://localhost:8090/findVideoUrlByMethodId";
 		        },
 		        formatter:function(value,row,index){
 		        	var url_=row.url;
-		        	console.info(url_);
 		        	return "<a href=http://localhost:8090/forWardToVideo?url="+url_+">点击进入</a>";
 		             
 		        }
@@ -106,11 +102,12 @@ var getDataUrl="http://localhost:8090/findVideoUrlByMethodId";
 		    onLoadSuccess:function(data){
 		    	return data;
 			},
+			onLoadError:function(){
+			}
+
 		});
 				
 			
-		</script>
-<!--以下代码不作为插件效果内容 -->
-	</body>
-    <!--  -->
+</script>
+</body>
 </html>

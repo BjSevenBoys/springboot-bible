@@ -8,5 +8,5 @@ public interface Queries {
   String DELETE_USER_BY_USERNAME = "DELETE FROM users WHERE username=?;";
   String LOAD_ALL_USERS = "SELECT*FROM users;";
   String LOAD_USER_BY_USERNAME = "SELECT*FROM users WHERE username=?;";
-  String LOAD_ALL_VIDEOURL="SELECT*FROM VIDEOURL_copy  LIMIT 100";
+  String LOAD_ALL_VIDEOURL="SELECT * FROM VIDEOURL_copy";
 }
